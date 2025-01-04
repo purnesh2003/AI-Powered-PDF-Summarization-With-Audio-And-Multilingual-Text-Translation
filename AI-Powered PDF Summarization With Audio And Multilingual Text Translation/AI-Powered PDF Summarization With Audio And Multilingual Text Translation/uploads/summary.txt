@@ -1,0 +1,1 @@
+Ml is a mobile software using Ml that transforms a smartphone into an emergency beacon. It conserves battery life by disabling non-essential functions and emits a low-energy, location-ping  signal to assist rescuers. EY Techathon 5.0: Crisis Compass.

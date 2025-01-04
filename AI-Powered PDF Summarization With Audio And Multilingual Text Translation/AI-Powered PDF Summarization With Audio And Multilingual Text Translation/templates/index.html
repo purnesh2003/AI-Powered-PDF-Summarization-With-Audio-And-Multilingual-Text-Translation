@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Summarizer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Upload PDF to Summarize</h1>
+        <form method="POST" enctype="multipart/form-data">
+            <input type="file" name="pdf_file" required>
+            <button type="submit">Upload and Summarize</button>
+        </form>
+
+        {% if summary_text %}
+        <div class="section">
+            <h2>Summary:</h2>
+            <p>{{ summary_text }}</p>
+
+            <h3>Choose Action:</h3>
+            <form action="{{ url_for('audio') }}" method="POST">
+                <input type="hidden" name="summary_file" value="{{ summary_file }}">
+                <button type="submit" name="action" value="pyttsx3">Convert to Audio (Offline)</button>
+                <button type="submit" name="action" value="gtts">Convert to Audio (Online)</button>
+            </form>
+
+            <form action="{{ url_for('translate') }}" method="POST">
+                <input type="hidden" name="summary_file" value="{{ summary_file }}">
+                <input type="text" name="language" placeholder="Target Language Code (e.g., 'kn' for Kannada)" required>
+                <button type="submit">Translate</button>
+            </form>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
